@@ -1,6 +1,6 @@
 import numpy as np
 
-gsize = 100
+gsize = 200
 bsize = gsize-1
 
 
@@ -54,18 +54,10 @@ def unimaker(universe):
     for x in range(0, bsize):
         for y in range(0, bsize):
 
-            if universe[x, y] > 5:
-                new_universe[x, y] += 1
-            elif universe[x, y] and not 2 <= num_neighbours(x, y) <= 3:
-                new_universe[x, y] -= 1
-            elif 5 < universe[x, y] < 10 and 5*universe[x, y] < pow_neighbours(x, y):
+            if not 2 <= num_neighbours(x,y) <= 3 and universe[x, y]:
                 new_universe[x, y] = 0
-            elif num_neighbours(x, y) >= 3:
-                new_universe[x, y] += 1
-
-            if universe[x, y] > 10:
-                new_universe[x, y] = 0
-
+            elif not universe[x, y] and num_neighbours(x, y) == 3:
+                new_universe[x, y] = 1
 
     #import matplotlib.pyplot as plt
     #plt.imshow(universe, cmap='binary')
